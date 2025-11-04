@@ -7,5 +7,6 @@ import java.util.Date;
 public interface BudgetRepository {
     public int getCurrentBudget();
     public int getBudgetForPeriod(Date startDate, Date finishData);
+    public void setBudget(int amount);
     public void updateBudget(TransactionType type, int amount);
 }
