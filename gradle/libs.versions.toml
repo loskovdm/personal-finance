@@ -22,4 +22,5 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid"}
 
