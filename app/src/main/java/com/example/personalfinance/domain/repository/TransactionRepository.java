@@ -14,4 +14,5 @@ public interface TransactionRepository {
     Transaction getTransaction(int id);
     List<Transaction> getTransactionsByType(TransactionType type, int number);
     ReportResponse getTransactionReport(ReportRequest reportRequest);
+    boolean existsTransactionByCategory(int id);
 }
