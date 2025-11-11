@@ -1,8 +1,7 @@
 package com.example.personalfinance.domain.usecase.analytics;
 
-import com.example.personalfinance.domain.model.ReportRequest;
-import com.example.personalfinance.domain.model.ReportResponse;
 import com.example.personalfinance.domain.model.TransactionType;
+import com.example.personalfinance.domain.model.TransactionTypeReport;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 
 import java.util.Calendar;
@@ -32,14 +31,11 @@ public class GetMonthSummaryUseCase {
         calendar.set(Calendar.MILLISECOND, 999);
         Date finishDate = calendar.getTime();
 
-        ReportRequest request = new ReportRequest(
-                type,
-                startDate,
-                finishDate,
-                false,
-                null
-        );
-        ReportResponse response = repository.getTransactionReport(request);
-        return response.getTotalAmount();
+        TransactionTypeReport report = repository.getTransactionTypeReport(startDate, finishDate, null);
+        if (type == TransactionType.INCOME) {
+            return report.getIncome();
+        } else {
+            return report.getExpense();
+        }
     }
 }
