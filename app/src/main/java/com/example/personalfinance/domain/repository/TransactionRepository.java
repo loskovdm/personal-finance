@@ -12,7 +12,7 @@ import java.util.Map;
 public interface TransactionRepository {
     void addTransaction(Transaction transaction);
     void updateTransaction(Transaction transaction);
-    void deleteTransaction(int id);
+    void deleteTransaction(Transaction transaction);
     Transaction getTransaction(int id);
     List<Transaction> getTransactionsByType(TransactionType type, int number);
     int getTransactionTotalAmountByType(TransactionType type,

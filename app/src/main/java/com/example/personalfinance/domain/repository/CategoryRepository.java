@@ -8,7 +8,7 @@ import java.util.List;
 public interface CategoryRepository {
     void addCategory(Category category);
     void updateCategory(Category category);
-    void deleteCategory(int id);
+    void deleteCategory(Category category);
     Category getCategory(int id);
     List<Category> getCategoriesByType(TransactionType type);
     boolean existsByNameAndType(String name, TransactionType type);

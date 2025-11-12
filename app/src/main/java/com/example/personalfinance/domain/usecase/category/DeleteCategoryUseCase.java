@@ -1,31 +1,40 @@
 package com.example.personalfinance.domain.usecase.category;
 
 import com.example.personalfinance.domain.exception.ValidationException;
+import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.repository.CategoryRepository;
-import com.example.personalfinance.domain.repository.TransactionRepository;
 
 public class DeleteCategoryUseCase {
-    private final CategoryRepository categoryRepository;
-    private final TransactionRepository transactionRepository;
+    private final CategoryRepository repository;
 
-    public DeleteCategoryUseCase(CategoryRepository categoryRepository,
-                                 TransactionRepository transactionRepository) {
-        this.categoryRepository = categoryRepository;
-        this.transactionRepository = transactionRepository;
+    public DeleteCategoryUseCase(CategoryRepository repository) {
+        this.repository = repository;
     }
 
-    public void execute(int id) {
-        validate(id);
-        categoryRepository.deleteCategory(id);
+    public void execute(Category category) {
+        validate(category);
+        repository.deleteCategory(category);
     }
 
-    private void validate(int id) {
-        if (id <= 0 ) {
-            throw new ValidationException("The category ID must be greater then 0");
+    private void validate(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category must not be null");
         }
 
-        if (transactionRepository.existsTransactionByCategory(id)) {
-            throw new ValidationException("There are transactions with this category");
+        if (category.getId() != 0) {
+            throw new ValidationException("The new category must have an ID of 0");
+        }
+
+        if (category.getType() == null) {
+            throw new ValidationException("Category type must be specified");
+        }
+
+        if (category.getName() == null || category.getName().trim().isEmpty()) {
+            throw new ValidationException("Category name cannot be empty");
+        }
+
+        if (repository.existsByNameAndType(category.getName(), category.getType())) {
+            throw new ValidationException("Category with this name and type already exists");
         }
     }
 }
