@@ -1,13 +1,13 @@
 package com.example.personalfinance.domain.repository;
 
 import com.example.personalfinance.domain.model.Category;
-import com.example.personalfinance.domain.model.CategoryReport;
+import com.example.personalfinance.domain.model.CategoryValue;
 import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.model.TransactionType;
-import com.example.personalfinance.domain.model.TransactionTypeReport;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface TransactionRepository {
     void addTransaction(Transaction transaction);
@@ -15,12 +15,13 @@ public interface TransactionRepository {
     void deleteTransaction(int id);
     Transaction getTransaction(int id);
     List<Transaction> getTransactionsByType(TransactionType type, int number);
-    TransactionTypeReport getTransactionTypeReport(Date startDate,
-                                                   Date finishDate,
-                                                   List<Category> includedCategories);
-    CategoryReport getTransactionCategoryReport(TransactionType type,
+    int getTransactionTotalAmountByType(TransactionType type,
+                                        Date startDate,
+                                        Date finishDate,
+                                        List<Category> includedCategories);
+
+    Map<Integer, Integer> getTransactionAmountsByCategories(List<Integer> categoryIds,
                                                 Date startDate,
-                                                Date finishDate,
-                                                List<Category> includedCategories);
+                                                Date finishDate);
     boolean existsTransactionByCategory(int id);
 }
