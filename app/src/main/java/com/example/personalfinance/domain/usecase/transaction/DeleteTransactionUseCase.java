@@ -11,8 +11,7 @@ public class DeleteTransactionUseCase {
     private final BudgetRepository budgetRepository;
 
     public DeleteTransactionUseCase(TransactionRepository transactionRepository,
-                                    BudgetRepository budgetRepository,
-                                    GetTransactionUseCase getTransactionUseCase) {
+                                    BudgetRepository budgetRepository) {
         this.transactionRepository = transactionRepository;
         this.budgetRepository = budgetRepository;
     }

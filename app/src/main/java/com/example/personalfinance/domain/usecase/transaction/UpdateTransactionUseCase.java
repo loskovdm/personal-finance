@@ -1,6 +1,5 @@
 package com.example.personalfinance.domain.usecase.transaction;
 
-import com.example.personalfinance.domain.exception.NotFoundException;
 import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.model.TransactionType;
@@ -20,7 +19,7 @@ public class UpdateTransactionUseCase {
         this.getTransactionUseCase = getTransactionUseCase;
     }
 
-    public void execute(Transaction updatedTransaction) throws NotFoundException {
+    public void execute(Transaction updatedTransaction) {
         validate(updatedTransaction);
 
         Transaction oldTransaction = getTransactionUseCase.execute(updatedTransaction.getId());

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CategoryReport {
     private final int totalAmount;
-    private final List<CategoryValue> categoryValues; // nullable – if null, no category filtering is applied
+    private final List<CategoryValue> categoryValues;
 
     public CategoryReport(int totalAmount, List<CategoryValue> categoryValues) {
         this.totalAmount = totalAmount;

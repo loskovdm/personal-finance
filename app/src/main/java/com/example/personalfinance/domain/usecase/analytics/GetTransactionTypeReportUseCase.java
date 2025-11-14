@@ -1,5 +1,6 @@
 package com.example.personalfinance.domain.usecase.analytics;
 
+import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.model.TransactionTypeReport;
@@ -18,6 +19,10 @@ public class GetTransactionTypeReportUseCase {
     public TransactionTypeReport execute(Date startDate,
                                          Date finishDate,
                                          List<Category> includedCategories) {
+        if (startDate.after(finishDate)) {
+            throw new ValidationException("The start date must be before the finish date");
+        }
+
         int incomeAmount = repository.getTransactionTotalAmountByType(
                 TransactionType.INCOME,
                 startDate,

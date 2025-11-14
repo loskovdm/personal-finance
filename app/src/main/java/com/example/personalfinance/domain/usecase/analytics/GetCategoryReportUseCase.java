@@ -1,5 +1,6 @@
 package com.example.personalfinance.domain.usecase.analytics;
 
+import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.model.CategoryReport;
 import com.example.personalfinance.domain.model.CategoryValue;
@@ -28,6 +29,10 @@ public class GetCategoryReportUseCase {
                                   Date startDate,
                                   Date finishDate,
                                   List<Category> includedCategories) {
+        if (startDate.after(finishDate)) {
+            throw new ValidationException("The start date must be before the finish date");
+        }
+
         int totalAmount = transactionRepository.getTransactionTotalAmountByType(
                 type,
                 startDate,
@@ -39,8 +44,8 @@ public class GetCategoryReportUseCase {
 
         if (includedCategories != null) {
             categories = categories.stream()
-                    .filter(c -> includedCategories.stream()
-                            .anyMatch(ic -> ic.getId() == c.getId()))
+                    .filter(category -> includedCategories.stream()
+                            .anyMatch(includedCategory -> includedCategory.getId() == category.getId()))
                     .collect(Collectors.toList());
             categoryIds = categories.stream()
                     .map(Category::getId)

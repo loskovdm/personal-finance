@@ -3,17 +3,23 @@ package com.example.personalfinance.domain.usecase.category;
 import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.repository.CategoryRepository;
+import com.example.personalfinance.domain.repository.TransactionRepository;
 
 public class DeleteCategoryUseCase {
-    private final CategoryRepository repository;
+    private final CategoryRepository categoryRepository;
+    private final TransactionRepository transactionRepository;
 
-    public DeleteCategoryUseCase(CategoryRepository repository) {
-        this.repository = repository;
+    public DeleteCategoryUseCase(CategoryRepository categoryRepository, TransactionRepository transactionRepository) {
+        this.categoryRepository = categoryRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public void execute(Category category) {
         validate(category);
-        repository.deleteCategory(category);
+        if (transactionRepository.existsTransactionByCategory(category.getId())) {
+            throw new ValidationException("Cannot delete category because it has associated transactions");
+        }
+        categoryRepository.deleteCategory(category);
     }
 
     private void validate(Category category) {
@@ -31,10 +37,6 @@ public class DeleteCategoryUseCase {
 
         if (category.getName() == null || category.getName().trim().isEmpty()) {
             throw new ValidationException("Category name cannot be empty");
-        }
-
-        if (repository.existsByNameAndType(category.getName(), category.getType())) {
-            throw new ValidationException("Category with this name and type already exists");
         }
     }
 }
