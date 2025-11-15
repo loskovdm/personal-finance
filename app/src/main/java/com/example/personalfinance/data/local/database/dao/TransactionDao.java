@@ -45,6 +45,12 @@ public interface TransactionDao {
                                     Date finishDate,
                                     List<Integer> includedCategoryIds);
 
+    @Query("SELECT * " +
+            "FROM transactions " +
+            "WHERE (:startDate IS NULL OR date >= :startDate) " +
+            "AND (:finishDate IS NULL OR date <= :finishDate)")
+    public List<TransactionEntity> getTransactionForPeriod(Date startDate, Date finishDate);
+
     @Query("SELECT categoryId AS categoryId, SUM(amount) AS amount " +
             "FROM transactions " +
             "WHERE date >= :startDate " +
