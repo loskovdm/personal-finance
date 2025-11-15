@@ -1,6 +1,5 @@
 [versions]
 agp = "8.13.0"
-hiltAndroid = "2.57.2"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
@@ -8,11 +7,11 @@ appcompat = "1.7.1"
 material = "1.13.0"
 activity = "1.11.0"
 constraintlayout = "2.2.1"
+hiltAndroid = "2.57.2"
 datastorePreferencesRxjava3 = "1.1.7"
+roomRxjava3 = "2.8.3"
 
 [libraries]
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -20,7 +19,11 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
 datastore-preferences-rxjava3 = { group = "androidx.datastore", name = "datastore-preferences-rxjava3", version.ref = "datastorePreferencesRxjava3" }
+room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomRxjava3"}
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomRxjava3"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
