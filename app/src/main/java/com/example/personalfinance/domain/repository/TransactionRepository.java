@@ -15,6 +15,7 @@ public interface TransactionRepository {
     void deleteTransaction(Transaction transaction);
     TransactionWithCategoryId getTransactionWithCategoryId(int id);
     List<TransactionWithCategoryId> getTransactionsWithCategoryIdByType(TransactionType type, int number);
+    List<TransactionWithCategoryId> getTransactionsWithCategoryIdForPeriod(Date startDate, Date finishDate);
     int getTransactionTotalAmountByType(TransactionType type,
                                         Date startDate,
                                         Date finishDate,

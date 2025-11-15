@@ -5,15 +5,19 @@ import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.repository.BudgetRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
+import com.example.personalfinance.domain.usecase.budget.UpdateBudgetUseCase;
 
 public class DeleteTransactionUseCase {
     private final TransactionRepository transactionRepository;
     private final BudgetRepository budgetRepository;
+    private final UpdateBudgetUseCase updateBudgetUseCase;
 
     public DeleteTransactionUseCase(TransactionRepository transactionRepository,
-                                    BudgetRepository budgetRepository) {
+                                    BudgetRepository budgetRepository,
+                                    UpdateBudgetUseCase updateBudgetUseCase) {
         this.transactionRepository = transactionRepository;
         this.budgetRepository = budgetRepository;
+        this.updateBudgetUseCase = updateBudgetUseCase;
     }
 
     public void execute(Transaction transaction) {
@@ -22,7 +26,7 @@ public class DeleteTransactionUseCase {
         TransactionType typeToUpdate = transaction.getType() == TransactionType.INCOME ? TransactionType.EXPENSE : TransactionType.INCOME;
 
         transactionRepository.deleteTransaction(transaction);
-        budgetRepository.updateBudget(typeToUpdate, transaction.getAmount());
+        updateBudgetUseCase.execute(typeToUpdate, transaction.getAmount());
     }
 
     private void validate(Transaction transaction) {

@@ -5,18 +5,22 @@ import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.repository.BudgetRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
+import com.example.personalfinance.domain.usecase.budget.UpdateBudgetUseCase;
 
 public class UpdateTransactionUseCase {
     private final TransactionRepository transactionRepository;
     private final BudgetRepository budgetRepository;
     private final GetTransactionUseCase getTransactionUseCase;
+    private final UpdateBudgetUseCase updateBudgetUseCase;
 
     public UpdateTransactionUseCase(TransactionRepository transactionRepository,
                                     BudgetRepository budgetRepository,
-                                    GetTransactionUseCase getTransactionUseCase) {
+                                    GetTransactionUseCase getTransactionUseCase,
+                                    UpdateBudgetUseCase updateBudgetUseCase) {
         this.transactionRepository = transactionRepository;
         this.budgetRepository = budgetRepository;
         this.getTransactionUseCase = getTransactionUseCase;
+        this.updateBudgetUseCase = updateBudgetUseCase;
     }
 
     public void execute(Transaction updatedTransaction) {
@@ -28,7 +32,7 @@ public class UpdateTransactionUseCase {
         int updatedAmount = Math.abs(differenceAmount);
 
         transactionRepository.updateTransaction(updatedTransaction);
-        budgetRepository.updateBudget(updatedType, updatedAmount);
+        updateBudgetUseCase.execute(updatedType, updatedAmount);
     }
 
     private void validate(Transaction transaction) {

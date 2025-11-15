@@ -1,12 +1,6 @@
 package com.example.personalfinance.domain.repository;
 
-import com.example.personalfinance.domain.model.TransactionType;
-
-import java.util.Date;
-
 public interface BudgetRepository {
-    public int getCurrentBudget();
-    public int getBudgetForPeriod(Date startDate, Date finishData);
+    public int getBudget();
     public void setBudget(int amount);
-    public void updateBudget(TransactionType type, int amount);
 }

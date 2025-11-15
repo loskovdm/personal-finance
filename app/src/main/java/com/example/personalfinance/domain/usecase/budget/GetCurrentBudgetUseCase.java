@@ -10,6 +10,6 @@ public class GetCurrentBudgetUseCase {
     }
 
     public int execute() {
-        return repository.getCurrentBudget();
+        return repository.getBudget();
     }
 }
