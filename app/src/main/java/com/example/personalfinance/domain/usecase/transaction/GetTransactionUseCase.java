@@ -5,22 +5,23 @@ import com.example.personalfinance.domain.mapper.TransactionMapper;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.model.TransactionWithCategoryId;
-import com.example.personalfinance.domain.repository.CategoryRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
+import com.example.personalfinance.domain.usecase.category.GetCategoryUseCase;
 
 public class GetTransactionUseCase {
     private final TransactionRepository transactionRepository;
-    private final CategoryRepository categoryRepository;
+    private final GetCategoryUseCase getCategoryUseCase;
 
     public GetTransactionUseCase(TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
+    public GetTransactionUseCase(TransactionRepository transactionRepository, GetCategoryUseCase getCategoryUseCase) {
         this.transactionRepository = transactionRepository;
-        this.categoryRepository = categoryRepository;
+        this.getCategoryUseCase = getCategoryUseCase;
     }
 
     public Transaction execute(int id) {
         validate(id);
         TransactionWithCategoryId transactionWithCategoryId = transactionRepository.getTransactionWithCategoryId(id);
-        Category category = categoryRepository.getCategory(transactionWithCategoryId.getCategoryId());
+        Category category = getCategoryUseCase.execute(transactionWithCategoryId.getCategoryId());
         return TransactionMapper.toTransaction(transactionWithCategoryId, category);
     }
 

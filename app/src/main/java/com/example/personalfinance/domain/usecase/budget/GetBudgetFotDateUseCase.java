@@ -2,7 +2,6 @@ package com.example.personalfinance.domain.usecase.budget;
 
 import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.model.TransactionWithCategoryId;
-import com.example.personalfinance.domain.repository.BudgetRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 
 import java.util.Calendar;
@@ -10,11 +9,14 @@ import java.util.Date;
 import java.util.List;
 
 public class GetBudgetFotDateUseCase {
-    private final BudgetRepository budgetRepository;
+    private final GetCurrentBudgetUseCase getCurrentBudgetUseCase;
     private final TransactionRepository transactionRepository;
 
     public GetBudgetFotDateUseCase(BudgetRepository budgetRepository, TransactionRepository transactionRepository) {
         this.budgetRepository = budgetRepository;
+    public GetBudgetFotDateUseCase(GetCurrentBudgetUseCase getCurrentBudgetUseCase,
+                                   TransactionRepository transactionRepository) {
+        this.getCurrentBudgetUseCase = getCurrentBudgetUseCase;
         this.transactionRepository = transactionRepository;
     }
 
@@ -37,7 +39,7 @@ public class GetBudgetFotDateUseCase {
             }
         }
 
-        int currentBudget = budgetRepository.getBudget();
+        int currentBudget = getCurrentBudgetUseCase.execute();
         return currentBudget - totalAmount;
     }
 }

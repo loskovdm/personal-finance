@@ -7,6 +7,7 @@ import com.example.personalfinance.domain.model.CategoryValue;
 import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.repository.CategoryRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
+import com.example.personalfinance.domain.usecase.category.GetCategoriesByTypeUseCase;
 
 import java.util.Date;
 import java.util.List;
@@ -15,14 +16,14 @@ import java.util.stream.Collectors;
 
 public class GetCategoryReportUseCase {
     private final TransactionRepository transactionRepository;
-    private final CategoryRepository categoryRepository;
+    private final GetCategoriesByTypeUseCase getCategoriesByTypeUseCase;
 
     public GetCategoryReportUseCase(
             TransactionRepository transactionRepository,
-            CategoryRepository categoryRepository
+            GetCategoriesByTypeUseCase getCategoriesByTypeUseCase
     ) {
         this.transactionRepository = transactionRepository;
-        this.categoryRepository = categoryRepository;
+        this.getCategoriesByTypeUseCase = getCategoriesByTypeUseCase;
     }
 
     public CategoryReport execute(TransactionType type,
@@ -39,7 +40,7 @@ public class GetCategoryReportUseCase {
                 finishDate,
                 includedCategories);
 
-        List<Category> categories = categoryRepository.getCategoriesByType(type);
+        List<Category> categories = getCategoriesByTypeUseCase.execute(type);
         List<Integer> categoryIds = null;
 
         if (includedCategories != null) {
