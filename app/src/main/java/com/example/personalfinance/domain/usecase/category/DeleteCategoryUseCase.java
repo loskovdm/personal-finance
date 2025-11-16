@@ -5,10 +5,13 @@ import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.repository.CategoryRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 
+import javax.inject.Inject;
+
 public class DeleteCategoryUseCase {
     private final CategoryRepository categoryRepository;
     private final TransactionRepository transactionRepository;
 
+    @Inject
     public DeleteCategoryUseCase(CategoryRepository categoryRepository, TransactionRepository transactionRepository) {
         this.categoryRepository = categoryRepository;
         this.transactionRepository = transactionRepository;

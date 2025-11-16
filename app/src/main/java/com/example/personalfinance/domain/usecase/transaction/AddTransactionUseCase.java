@@ -5,9 +5,13 @@ import com.example.personalfinance.domain.model.Transaction;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 import com.example.personalfinance.domain.usecase.budget.UpdateBudgetUseCase;
 
+import javax.inject.Inject;
+
 public class AddTransactionUseCase {
     private final TransactionRepository transactionRepository;
     private final UpdateBudgetUseCase updateBudgetUseCase;
+
+    @Inject
     public AddTransactionUseCase(TransactionRepository transactionRepository,
                                  UpdateBudgetUseCase updateBudgetUseCase) {
         this.transactionRepository = transactionRepository;

@@ -4,9 +4,12 @@ import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.repository.CategoryRepository;
 
+import javax.inject.Inject;
+
 public class AddCategoryUseCase {
     private final CategoryRepository repository;
 
+    @Inject
     public AddCategoryUseCase(CategoryRepository repository) {
         this.repository = repository;
     }

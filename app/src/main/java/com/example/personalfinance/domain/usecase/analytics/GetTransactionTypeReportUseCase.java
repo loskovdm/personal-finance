@@ -9,9 +9,12 @@ import com.example.personalfinance.domain.repository.TransactionRepository;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetTransactionTypeReportUseCase {
     private final TransactionRepository repository;
 
+    @Inject
     public GetTransactionTypeReportUseCase(TransactionRepository repository) {
         this.repository = repository;
     }

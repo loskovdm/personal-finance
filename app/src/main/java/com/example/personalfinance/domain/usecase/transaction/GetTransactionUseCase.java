@@ -8,11 +8,13 @@ import com.example.personalfinance.domain.model.TransactionWithCategoryId;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 import com.example.personalfinance.domain.usecase.category.GetCategoryUseCase;
 
+import javax.inject.Inject;
+
 public class GetTransactionUseCase {
     private final TransactionRepository transactionRepository;
     private final GetCategoryUseCase getCategoryUseCase;
 
-    public GetTransactionUseCase(TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
+    @Inject
     public GetTransactionUseCase(TransactionRepository transactionRepository, GetCategoryUseCase getCategoryUseCase) {
         this.transactionRepository = transactionRepository;
         this.getCategoryUseCase = getCategoryUseCase;

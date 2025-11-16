@@ -1,14 +1,14 @@
 package com.example.personalfinance.domain.usecase.budget;
 
 import com.example.personalfinance.domain.model.TransactionType;
-import com.example.personalfinance.domain.repository.BudgetRepository;
+
+import javax.inject.Inject;
 
 public class UpdateBudgetUseCase {
     private final GetCurrentBudgetUseCase getCurrentBudgetUseCase;
     private final SetBudgetUseCase setBudgetUseCase;
 
-    public UpdateBudgetUseCase(BudgetRepository repository) {
-        this.repository = repository;
+    @Inject
     public UpdateBudgetUseCase(GetCurrentBudgetUseCase getCurrentBudgetUseCase,
                                SetBudgetUseCase setBudgetUseCase) {
         this.getCurrentBudgetUseCase = getCurrentBudgetUseCase;

@@ -6,9 +6,12 @@ import com.example.personalfinance.domain.repository.CategoryRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetCategoriesByTypeUseCase {
     private final CategoryRepository repository;
 
+    @Inject
     public GetCategoriesByTypeUseCase(CategoryRepository repository) {
         this.repository = repository;
     }

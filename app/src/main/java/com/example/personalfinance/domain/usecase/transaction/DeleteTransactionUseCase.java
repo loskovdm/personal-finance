@@ -6,10 +6,13 @@ import com.example.personalfinance.domain.model.TransactionType;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 import com.example.personalfinance.domain.usecase.budget.UpdateBudgetUseCase;
 
+import javax.inject.Inject;
+
 public class DeleteTransactionUseCase {
     private final TransactionRepository transactionRepository;
     private final UpdateBudgetUseCase updateBudgetUseCase;
 
+    @Inject
     public DeleteTransactionUseCase(TransactionRepository transactionRepository,
                                     UpdateBudgetUseCase updateBudgetUseCase) {
         this.transactionRepository = transactionRepository;

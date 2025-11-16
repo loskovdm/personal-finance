@@ -6,9 +6,12 @@ import com.example.personalfinance.domain.repository.TransactionRepository;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.inject.Inject;
+
 public class GetMonthSummaryUseCase {
     private final TransactionRepository repository;
 
+    @Inject
     public GetMonthSummaryUseCase(TransactionRepository repository) {
         this.repository = repository;
     }

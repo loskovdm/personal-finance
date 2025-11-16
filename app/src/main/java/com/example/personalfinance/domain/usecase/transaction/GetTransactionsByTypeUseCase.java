@@ -11,11 +11,13 @@ import com.example.personalfinance.domain.usecase.category.GetCategoryUseCase;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 public class GetTransactionsByTypeUseCase {
     private final TransactionRepository transactionRepository;
     private final GetCategoryUseCase getCategoryUseCase;
 
-    public GetTransactionsByTypeUseCase(TransactionRepository transactionRepository, CategoryRepository categoryRepository) {
+    @Inject
     public GetTransactionsByTypeUseCase(TransactionRepository transactionRepository, GetCategoryUseCase getCategoryUseCase) {
         this.transactionRepository = transactionRepository;
         this.getCategoryUseCase = getCategoryUseCase;

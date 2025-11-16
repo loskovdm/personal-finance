@@ -3,9 +3,12 @@ package com.example.personalfinance.domain.usecase.budget;
 import com.example.personalfinance.domain.exception.ValidationException;
 import com.example.personalfinance.domain.repository.BudgetRepository;
 
+import javax.inject.Inject;
+
 public class SetBudgetUseCase {
     private final BudgetRepository repository;
 
+    @Inject
     public SetBudgetUseCase(BudgetRepository repository) {
         this.repository = repository;
     }

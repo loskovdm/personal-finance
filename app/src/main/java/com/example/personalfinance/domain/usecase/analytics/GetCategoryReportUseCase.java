@@ -5,7 +5,6 @@ import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.model.CategoryReport;
 import com.example.personalfinance.domain.model.CategoryValue;
 import com.example.personalfinance.domain.model.TransactionType;
-import com.example.personalfinance.domain.repository.CategoryRepository;
 import com.example.personalfinance.domain.repository.TransactionRepository;
 import com.example.personalfinance.domain.usecase.category.GetCategoriesByTypeUseCase;
 
@@ -14,10 +13,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 public class GetCategoryReportUseCase {
     private final TransactionRepository transactionRepository;
     private final GetCategoriesByTypeUseCase getCategoriesByTypeUseCase;
 
+    @Inject
     public GetCategoryReportUseCase(
             TransactionRepository transactionRepository,
             GetCategoriesByTypeUseCase getCategoriesByTypeUseCase

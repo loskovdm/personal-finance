@@ -8,12 +8,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetBudgetFotDateUseCase {
     private final GetCurrentBudgetUseCase getCurrentBudgetUseCase;
     private final TransactionRepository transactionRepository;
 
-    public GetBudgetFotDateUseCase(BudgetRepository budgetRepository, TransactionRepository transactionRepository) {
-        this.budgetRepository = budgetRepository;
+    @Inject
     public GetBudgetFotDateUseCase(GetCurrentBudgetUseCase getCurrentBudgetUseCase,
                                    TransactionRepository transactionRepository) {
         this.getCurrentBudgetUseCase = getCurrentBudgetUseCase;
