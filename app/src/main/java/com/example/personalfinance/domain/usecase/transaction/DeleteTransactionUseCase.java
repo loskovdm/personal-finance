@@ -33,10 +33,6 @@ public class DeleteTransactionUseCase {
             throw new IllegalArgumentException("Transaction must not be null");
         }
 
-        if (transaction.getId() != 0) {
-            throw new ValidationException("The new transaction must have an ID of 0");
-        }
-
         if (transaction.getAmount() <= 0) {
             throw new ValidationException("Amount must be greater then 0");
         }

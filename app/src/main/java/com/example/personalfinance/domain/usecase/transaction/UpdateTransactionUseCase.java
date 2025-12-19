@@ -27,11 +27,14 @@ public class UpdateTransactionUseCase {
 
         Transaction oldTransaction = getTransactionUseCase.execute(updatedTransaction.getId());
         int differenceAmount = updatedTransaction.getAmount() - oldTransaction.getAmount();
-        TransactionType updatedType = differenceAmount >= 0 ? TransactionType.INCOME : TransactionType.EXPENSE;
-        int updatedAmount = Math.abs(differenceAmount);
+
+        if (oldTransaction.getType() == TransactionType.INCOME) {
+            updateBudgetUseCase.execute(TransactionType.INCOME, differenceAmount);
+        } else if (oldTransaction.getType() == TransactionType.EXPENSE) {
+            updateBudgetUseCase.execute(TransactionType.EXPENSE, differenceAmount);
+        }
 
         transactionRepository.updateTransaction(updatedTransaction);
-        updateBudgetUseCase.execute(updatedType, updatedAmount);
     }
 
     private void validate(Transaction transaction) {

@@ -1,5 +1,7 @@
 package com.example.personalfinance.domain.usecase.transaction;
 
+import android.util.Log;
+
 import com.example.personalfinance.domain.mapper.TransactionMapper;
 import com.example.personalfinance.domain.model.Category;
 import com.example.personalfinance.domain.model.Transaction;
@@ -23,11 +25,11 @@ public class GetTransactionsByTypeUseCase {
         this.getCategoryUseCase = getCategoryUseCase;
     }
 
-    public List<Transaction> execute(TransactionType type) {
-        List<TransactionWithCategoryId> transactionsWithCategoryId = transactionRepository.getTransactionsWithCategoryIdByType(type, 10);
+    public List<Transaction> execute(TransactionType type, int numberTransactions) {
+        List<TransactionWithCategoryId> transactionsWithCategoryId = transactionRepository.getTransactionsWithCategoryIdByType(type, numberTransactions);
         return transactionsWithCategoryId.stream()
                 .map(transactionWithCategoryId -> {
-                    Category category = getCategoryUseCase.execute(transactionWithCategoryId.getId());
+                    Category category = getCategoryUseCase.execute(transactionWithCategoryId.getCategoryId());
                     return TransactionMapper.toTransaction(transactionWithCategoryId, category);
                 })
                 .collect(Collectors.toList());

@@ -50,4 +50,6 @@ dependencies {
     annotationProcessor(libs.room.compiler)
 
     implementation(libs.datastore.preferences.rxjava3)
+
+    implementation(libs.mpandroidchart)
 }

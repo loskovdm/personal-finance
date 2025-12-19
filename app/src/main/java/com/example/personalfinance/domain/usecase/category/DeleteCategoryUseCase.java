@@ -30,10 +30,6 @@ public class DeleteCategoryUseCase {
             throw new IllegalArgumentException("Category must not be null");
         }
 
-        if (category.getId() != 0) {
-            throw new ValidationException("The new category must have an ID of 0");
-        }
-
         if (category.getType() == null) {
             throw new ValidationException("Category type must be specified");
         }

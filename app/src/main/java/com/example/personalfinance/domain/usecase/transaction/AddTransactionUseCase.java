@@ -20,8 +20,9 @@ public class AddTransactionUseCase {
 
     public void execute(Transaction transaction) {
         validate(transaction);
-        transactionRepository.addTransaction(transaction);
         updateBudgetUseCase.execute(transaction.getType(), transaction.getAmount());
+        transactionRepository.addTransaction(transaction);
+
     }
 
     private void validate(Transaction transaction) {

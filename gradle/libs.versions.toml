@@ -9,6 +9,7 @@ activity = "1.11.0"
 constraintlayout = "2.2.1"
 hiltAndroid = "2.57.2"
 datastorePreferencesRxjava3 = "1.1.7"
+mpandroidchart = "v3.1.0"
 roomRxjava3 = "2.8.3"
 
 [libraries]
@@ -22,6 +23,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
 datastore-preferences-rxjava3 = { group = "androidx.datastore", name = "datastore-preferences-rxjava3", version.ref = "datastorePreferencesRxjava3" }
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomRxjava3"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomRxjava3"}
 
